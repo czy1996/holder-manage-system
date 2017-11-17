@@ -15,6 +15,7 @@
     </div>
 </template>
 <script>
+    import Cookies from 'js-cookie'
     export default {
         data() {
             return {
@@ -30,7 +31,7 @@
         methods:{
             handleCommand(command) {
                 if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
+                    Cookies.remove('Session-id')
                     this.$router.push('/login');
                 }
             }
