@@ -31,19 +31,24 @@
                     },
                     {
                         icon: 'el-icon-menu',
-                        index: '2',
-                        title: '表格',
-                        subs: [
-                            {
-                                index: 'basetable',
-                                title: '基础表格'
-                            },
-                            {
-                                index: 'vuetable',
-                                title: 'Vue表格组件'
-                            }
-                        ]
+                        index: 'booktable',
+                        title: '书目管理'
                     },
+//                    {
+//                        icon: 'el-icon-menu',
+//                        index: '2',
+//                        title: '表格',
+//                        subs: [
+//                            {
+//                                index: 'basetable',
+//                                title: '基础表格'
+//                            },
+//                            {
+//                                index: 'vuetable',
+//                                title: 'Vue表格组件'
+//                            }
+//                        ]
+//                    },
                     {
                         icon: 'el-icon-date',
                         index: '3',
