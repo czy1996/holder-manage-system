@@ -40,7 +40,6 @@
                 <vue-markdown :source="source"></vue-markdown>
             </article>
         </div>
-        <vue-markdown :source="source"></vue-markdown>
     </div>
 </template>
 
