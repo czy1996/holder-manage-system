@@ -2,28 +2,26 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 书目管理</el-breadcrumb-item>
-                <el-breadcrumb-item>书目</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i> 表格</el-breadcrumb-item>
+                <el-breadcrumb-item>基础表格</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
-            <!--<el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>-->
-            <!--<el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">-->
-                <!--<el-option key="1" label="广东省" value="广东省"></el-option>-->
-                <!--<el-option key="2" label="湖南省" value="湖南省"></el-option>-->
-            <!--</el-select>-->
+            <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
+            <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
+                <el-option key="1" label="广东省" value="广东省"></el-option>
+                <el-option key="2" label="湖南省" value="湖南省"></el-option>
+            </el-select>
             <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
         </div>
         <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="isbn" label="ISBN" sortable width="150">
+            <el-table-column prop="date" label="日期" sortable width="150">
             </el-table-column>
-            <el-table-column prop="title" label="书名" width="120">
+            <el-table-column prop="name" label="姓名" width="120">
             </el-table-column>
-            <el-table-column prop="second_price" label="定价">
-            </el-table-column>
-            <el-table-column prop="inventory" label="库存">
+            <el-table-column prop="address" label="地址" :formatter="formatter">
             </el-table-column>
             <el-table-column label="操作" width="180">
                 <template scope="scope">
@@ -73,9 +71,9 @@
                         }
                     }
                     if(!is_del){
-                        if( // d.address.indexOf(self.select_cate) > -1 &&
-                            (d.title.indexOf(self.select_word) > -1 ||
-                            d.description.indexOf(self.select_word) > -1)
+                        if(d.address.indexOf(self.select_cate) > -1 && 
+                            (d.name.indexOf(self.select_word) > -1 ||
+                            d.address.indexOf(self.select_word) > -1)
                         ){
                             return d;
                         }
@@ -90,8 +88,11 @@
             },
             getData(){
                 let self = this;
-                self.$book.all(res => {
-                    self.tableData = res
+                if(process.env.NODE_ENV === 'development'){
+                    self.url = '/ms/table/list';
+                };
+                self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
+                    self.tableData = res.data.list;
                 })
             },
             search(){

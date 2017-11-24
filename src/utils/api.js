@@ -1,4 +1,6 @@
-const baseUrl = 'http://localhost:5050';
+const devUrl = 'http://localhost:5050';
+const productUrl = ''
+const baseUrl = productUrl
 const log = console.log.bind(console)
 
 const ajax = function (method, path, data, callback) {
@@ -22,7 +24,23 @@ Api.install = function (Vue, options) {
     // 1. 添加全局方法或属性
     Vue.prototype.$admin = new Admin()
     Vue.prototype.$book = new Book()
+    Vue.prototype.$order = new Order()
+    Vue.prototype.$formatTime = formatTime
+    Vue.prototype.$user = new User()
+}
 
+const  add0 = m => {return m<10?'0'+m:m }
+
+const formatTime = timeStamp => {
+    let milli = timeStamp * 1000
+    let time = new Date(milli);
+    let y = time.getFullYear();
+    let m = time.getMonth() + 1;
+    let d = time.getDate();
+    let h = time.getHours();
+    let mm = time.getMinutes();
+    let s = time.getSeconds();
+    return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
 }
 
 class Base {
@@ -98,6 +116,38 @@ class Book extends Base {
     getByTitle(title, callback) {
         let path = `/get?title=${title}`
         this.get(path, callback)
+    }
+}
+
+class Order extends Base {
+    constructor() {
+        super('order')
+    }
+
+    all(callback) {
+        let path = '/get'
+        this.get(path, callback)
+    }
+
+    update(data, callback) {
+        let path = '/update'
+        this.post(path, data, callback)
+    }
+}
+
+class User extends Base {
+    constructor() {
+        super('user')
+    }
+
+    getInfo(id, callback) {
+        let path = `/getInfo?id=${id}`
+        this.get(path, callback)
+    }
+
+    updateInfo(data, callback) {
+        let path = '/updateInfo'
+        this.post(path, data, callback)
     }
 }
 

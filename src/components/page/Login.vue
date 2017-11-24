@@ -49,6 +49,7 @@
                         this.$admin.login(self.ruleForm.username, self.ruleForm.password, data => {
                             if (data.status === 'ok') {
                                 self.$router.push('/readme')
+                                localStorage.name = data.name
                             } else {
                                 this.log('error submit!!')
                                 return false
