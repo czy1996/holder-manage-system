@@ -27,9 +27,13 @@ Api.install = function (Vue, options) {
     Vue.prototype.$order = new Order()
     Vue.prototype.$formatTime = formatTime
     Vue.prototype.$user = new User()
+    Vue.prototype.$board = new Board()
+
 }
 
-const  add0 = m => {return m<10?'0'+m:m }
+const add0 = m => {
+    return m < 10 ? '0' + m : m
+}
 
 const formatTime = timeStamp => {
     let milli = timeStamp * 1000
@@ -147,6 +151,22 @@ class User extends Base {
 
     updateInfo(data, callback) {
         let path = '/updateInfo'
+        this.post(path, data, callback)
+    }
+}
+
+class Board extends Base {
+    constructor() {
+        super('board')
+    }
+
+    getById(id, callback) {
+        let path = `/get?id=${id}`
+        this.get(path, callback)
+    }
+
+    updateById(data, callback) {
+        let path = '/update'
         this.post(path, data, callback)
     }
 }
