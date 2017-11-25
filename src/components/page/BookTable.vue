@@ -123,7 +123,7 @@
             handleEditComplete(index, row) {
                 this.$message('编辑第' + (index + 1) + '行');
                 this.$book.update(row.id, {
-                    inventory: row.inventory,
+                    inventory: parseInt(row.inventory),
                     second_price: row.second_price,
                 }, res => {
                     this.log(res)
