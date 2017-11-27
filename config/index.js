@@ -29,10 +29,10 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             '/api':{
-                target:'http://jsonplaceholder.typicode.com',
+                target:'http://localhost:5050',
                 changeOrigin:true,
                 pathRewrite:{
-                    '/api':''
+                    '^/api':''
                 }
             },
             '/ms':{
