@@ -37,7 +37,7 @@
                 <!--&lt;!&ndash;<br>&ndash;&gt;-->
                 <!--&lt;!&ndash;<el-checkbox disabled checked>列表拖拽排序</el-checkbox>&ndash;&gt;-->
                 <!--&lt;!&ndash;<br>&ndash;&gt;-->
-                <vue-markdown :source="source"></vue-markdown>
+                <vue-markdown :source="source" class="markdown-body"></vue-markdown>
             </article>
         </div>
     </div>

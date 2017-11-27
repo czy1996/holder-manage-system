@@ -1,6 +1,6 @@
 const devUrl = 'http://localhost:5050';
 const productUrl = ''
-const baseUrl = productUrl
+const baseUrl = devUrl
 const log = console.log.bind(console)
 
 const ajax = function (method, path, data, callback) {
